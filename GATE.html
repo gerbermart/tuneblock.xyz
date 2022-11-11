@@ -68,8 +68,8 @@
             $("#waddyid").html('Successfull connection! (Wallet: '+myWaddy+')<br><br>   <span style="color:red;">-->press the same button once more...</span><br>');
         };
         function getOwners(){
-            let contracts=['0xB0e5Faac1429592CEA8a70F8828D7bD88b788e82','0xd8FAbd716eCCBF98157f6728D3c187625a513127','0x349dbADc6d24Eb7E534EF230Db01a35208E49d04'];
-            let token_trackers=['NORLI','GERBS','BONES'];
+            let contracts=['0xbef7e304a68eb5f9c56fc52d6de3acf5a8e15dc6'];
+            let token_trackers=['TUNES'];
 
             for (k=0;k<3;k++){
                 let contract=contracts[k];
@@ -83,7 +83,7 @@
                 stopper='no';
                 for (let i=1;((i<100) & (stopper=='no'));i++){
                     
-                    const url_str='https://api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
+                    const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
                     const settings = {
                     async: true,
                     crossDomain: true,
@@ -128,14 +128,43 @@
             };
         };
         function makeButtons(){
-            $("#GERBSid").html('<button class="locked_button">GERBS Archive Locked</button>');
-            $("#NORLIid").html('<button class="locked_button">NORLI Archive Locked</button>');
-            $("#BONESid").html('<button class="locked_button">BONES Archive Locked</button>');
+            $("#TUNESid").html('<button class="locked_button">TUNES Archive Locked</button>');
         }
         function getKeys(){
-            getWaddy();
+            gettestWaddy();
             getOwners();
         }
+        const ethereumButton = document.querySelector('.enableEthereumButton');
+        const sendEthButton = document.querySelector('.sendEthButton');
+
+        let accounts = [];
+
+        //Sending Ethereum to an address
+        sendEthButton.addEventListener('click', () => {
+        ethereum
+            .request({
+            method: 'eth_sendTransaction',
+            params: [
+                {
+                from: accounts[0],
+                to: '0xbef7e304a68eb5f9c56fc52d6de3acf5a8e15dc6',
+                value: '0x38d7ea4c68000',
+                data: "0xcd8771ce",
+                },
+            ],
+            })
+            .then((txHash) => console.log(txHash))
+            .catch((error) => console.error);
+        });
+
+        ethereumButton.addEventListener('click', () => {
+        getAccount();
+        });
+
+        async function getAccount() {
+        accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        }
+
     
     </script>
 
@@ -144,7 +173,9 @@
 <body onload="makeButtons();">
 
 
-
+<button class="enableEthereumButton btn">Enable Ethereum</button>
+<button class="sendEthButton btn">Send Eth</button>
+    
 
 <h1>Token-Gated Content for Martin Gerber <br> -> on mobile? use MetaMask browser</h1>
 
@@ -159,11 +190,7 @@
 </div>
 
 
-<div id="GERBSid">
-</div>
-<div id="NORLIid">
-</div>
-<div id="BONESid">
+<div id="TUNESid">
 </div>
 
 
