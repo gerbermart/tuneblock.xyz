@@ -141,9 +141,9 @@
                 ],
                 })
                 .then((txHash) => console.log(txHash))
+                .catch((error) => console.error)
                 .then(text+='<p><img src="IMAGES/RICK.gif" width="500"></p>')
-                .then($("#msgid").html(text))
-                .catch((error) => console.error);
+                .then($("#msgid").html(text));
         }
         function makeButtons(){
             $("#TUNESid").html('<button class="locked_button">TUNES Archive Locked</button>');
