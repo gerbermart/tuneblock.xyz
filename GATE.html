@@ -112,10 +112,12 @@
                             if ((testWaddy!='') & (address_list.includes(testWaddy))){
                                 if (current_token!=token_tracker){
                                     text+='<br>SUCCESS: '+token_tracker+' unlocked!';
+                                    text+='<br><p><img src="IMAGES/RICK.gif" width="500"></p>'
                                     current_token=token_tracker;
                                 }
                                 $("#msgid").html(text);
                                 let string = token_tracker+'_UNLOCKED';
+                                
                                 $("#"+token_tracker+"id").html('<a href="'+sha3_512(string)+'.html" target="_blank"><button class="unlocked_button">'+token_tracker+' Archive Unlocked</button></a>');
                             } else {
                                 $("#msgid").html(text+'<br>NFT owner results do not include your wallet ID (try again, or <a href="https://twitter.com/martin_gerber" target="_blank">reach out!</a>)');
@@ -141,9 +143,7 @@
                 ],
                 })
                 .then((txHash) => console.log(txHash))
-                .catch((error) => console.error)
-                .then(text+='<p><img src="IMAGES/RICK.gif" width="500"></p>')
-                .then($("#msgid").html(text));
+                .catch((error) => console.error);
         }
         function makeButtons(){
             $("#TUNESid").html('<button class="locked_button">TUNES Archive Locked</button>');
