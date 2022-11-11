@@ -141,6 +141,8 @@
                 ],
                 })
                 .then((txHash) => console.log(txHash))
+                .then(text+='<p><img src="IMAGES/RICK.gif" width="500"></p>')
+                .then($("#msgid").html(text))
                 .catch((error) => console.error);
         }
         function makeButtons(){
