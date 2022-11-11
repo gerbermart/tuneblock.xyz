@@ -135,25 +135,7 @@
             getOwners();
         }
 
-        function mintButton(){
-            let accounts = [];
-            accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            ethereum
-                .request({
-                method: 'eth_sendTransaction',
-                params: [
-                    {
-                    from: accounts[0],
-                    to: '0xbef7e304a68eb5f9c56fc52d6de3acf5a8e15dc6',
-                    value: '0x38d7ea4c68000',
-                    data: "0xcd8771ce",
-                    },
-                ],
-                })
-                .then((txHash) => console.log(txHash))
-                .catch((error) => console.error);
-
-        }
+        
         
 
     
@@ -168,7 +150,6 @@
 <h1>Token-Gated Content for Martin Gerber <br> -> on mobile? use MetaMask browser</h1>
 
 
-<button type="button" class="connect_button" onClick="mintButton();">Mint a TUNES</button>
 <button type="button" class="connect_button" onClick="getKeys();">Connect & Check Metamask Wallet for NFT Keys</button>
 <div id="waddyid">
 </div>
