@@ -1,0 +1,178 @@
+<html>
+<head>
+
+    <style>
+         .locked_button {
+            background-color: #ff6666; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🔑</text></svg>")
+                16 0,
+                auto;
+        }
+        
+        .unlocked_button {
+            background-color: #239d00; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🎉</text></svg>")
+                16 0,
+                auto;
+        }
+
+        .connect_button {
+            background-color: #239d00; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👛</text></svg>")
+                16 0,
+                auto;
+        }
+
+        html *
+        {
+            font-family: 'Courier New' !important;
+        }
+    </style>
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./sha3.js"></script>
+    <script type="text/javascript">
+        async function getWaddy(){
+            if (typeof window.ethereum !== 'undefined') {
+                console.log('MetaMask is installed!');
+            }
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0];
+            myWaddy=account.toLowerCase();
+            $("#waddyid").html('Successfull connection! (Wallet: '+myWaddy+')<br><br>   <span style="color:red;">-->press the same button once more...</span><br>');
+        };
+        function gettestWaddy(){
+            myWaddy='0x7e8C38Ad50622c0b26906C9Cf81D2825fC78A38B'.toLowerCase();
+            $("#waddyid").html('Successfull connection! (Wallet: '+myWaddy+')<br><br>   <span style="color:red;">-->press the same button once more...</span><br>');
+        };
+        function getOwners(){
+            let contracts=['0xB0e5Faac1429592CEA8a70F8828D7bD88b788e82','0xd8FAbd716eCCBF98157f6728D3c187625a513127','0x349dbADc6d24Eb7E534EF230Db01a35208E49d04'];
+            let token_trackers=['NORLI','GERBS','BONES'];
+
+            for (k=0;k<3;k++){
+                let contract=contracts[k];
+                let token_tracker=token_trackers[k];
+            
+                text='';
+                addresses='';
+                current_token='';
+                
+                let testWaddy = myWaddy.toLowerCase();
+                stopper='no';
+                for (let i=1;((i<100) & (stopper=='no'));i++){
+                    
+                    const url_str='https://api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
+                    const settings = {
+                    async: true,
+                    crossDomain: true,
+                    url: url_str,
+                    method: 'GET',
+                    headers: {}
+                    };
+                
+                    $(document).ready(function(){
+                        $("#msgid").html('doin stuff...');
+                        $.ajax(settings).done(function (response) {
+                            
+                            const json = JSON.stringify(response).replace(/[\r\n]/gm, '');
+                            
+                            const obj = JSON.parse(json);
+                            
+                            if (obj.length==0){
+                                stopper='no';
+                            }
+                            
+                            for (let j = 0; j < obj.owners.length; j++) {
+                            //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
+                            addresses+=obj.owners[j].owner.address.toString()+','
+                            } 
+                            var address_list = addresses.split(',')
+                            if ((testWaddy!='') & (address_list.includes(testWaddy))){
+                                if (current_token!=token_tracker){
+                                    text+='<br>SUCCESS: '+token_tracker+' unlocked!';
+                                    current_token=token_tracker;
+                                }
+                                $("#msgid").html(text);
+                                let string = token_tracker+'_UNLOCKED';
+                                $("#"+token_tracker+"id").html('<a href="'+sha3_512(string)+'.html" target="_blank"><button class="unlocked_button">'+token_tracker+' Archive Unlocked</button></a>');
+                            } else {
+                                $("#msgid").html(text+'<br>NFT owner results do not include your wallet ID (try again, or <a href="https://twitter.com/martin_gerber" target="_blank">reach out!</a>)');
+                            }
+                            
+                        });
+                        
+                    });
+                };
+            };
+        };
+        function makeButtons(){
+            $("#GERBSid").html('<button class="locked_button">GERBS Archive Locked</button>');
+            $("#NORLIid").html('<button class="locked_button">NORLI Archive Locked</button>');
+            $("#BONESid").html('<button class="locked_button">BONES Archive Locked</button>');
+        }
+        function getKeys(){
+            getWaddy();
+            getOwners();
+        }
+    
+    </script>
+
+</head>
+
+<body onload="makeButtons();">
+
+
+
+
+<h1>Token-Gated Content for Martin Gerber <br> -> on mobile? use MetaMask browser</h1>
+
+
+<button type="button" class="connect_button" onClick="getKeys();">Connect & Check Metamask Wallet for NFT Keys</button>
+<div id="waddyid">
+</div>
+
+<p>note: you may need to press the "Connect & Check" button twice</p>
+<br><br>
+<div id="waddyid">
+</div>
+
+
+<div id="GERBSid">
+</div>
+<div id="NORLIid">
+</div>
+<div id="BONESid">
+</div>
+
+
+
+<br>
+<div id="msgid">
+</div>
+
+<div id="linkid"></div>
+
+</body>
+</html>
