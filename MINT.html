@@ -1,6 +1,54 @@
-
 <html>
     <header>
+        <style>
+            .locked_button {
+               background-color: #ff6666; /* Green */
+               border: none;
+               color: white;
+               padding: 15px 32px;
+               text-align: center;
+               text-decoration: none;
+               display: inline-block;
+               font-size: 16px;
+               cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🔑</text></svg>")
+                   16 0,
+                   auto;
+           }
+           
+           .unlocked_button {
+               background-color: #239d00; /* Green */
+               border: none;
+               color: white;
+               padding: 15px 32px;
+               text-align: center;
+               text-decoration: none;
+               display: inline-block;
+               font-size: 16px;
+               cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🎉</text></svg>")
+                   16 0,
+                   auto;
+           }
+   
+           .connect_button {
+               background-color: #239d00; /* Green */
+               border: none;
+               color: white;
+               padding: 15px 32px;
+               text-align: center;
+               text-decoration: none;
+               display: inline-block;
+               font-size: 16px;
+               cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>👛</text></svg>")
+                   16 0,
+                   auto;
+           }
+   
+           html *
+           {
+               font-family: 'Courier New' !important;
+           }
+       </style>
+       
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
