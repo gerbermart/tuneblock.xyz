@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="./web3.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function () {
+            window.web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
+        })
+        function getTXN() {
+            var txHash, wei, balance
+            txHash = document.getElementById("txHash").value
+            try {
+                web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
+
+                    document.getElementById("output").innerHTML = 'Checking TXN: '+txHash;
+
+                    // If we've got a receipt, check status and log / change text accordingly
+                    if (receipt.status===true) {
+                        
+                        document.getElementById("output").innerHTML = 'TXN complete '+txHash;
+                    }
+                    else if (receipt.status === false) {
+                        document.getElementById("output").innerHTML = 'TXN failed '+txHash;
+                    }
+                });
+            } catch (err) {
+                document.getElementById("output").innerHTML = err;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>ETH Balance Fetcher</h1>
+    <p>Enter your Ethereum TXN:</p>
+    <input type="text" size="50" id="txHash" />
+    <button type="button" onClick="getTXN();">Get TXN status</button>
+    <br />
+    <br />
+    <div id="output"></div>
+</body>
+</html>
