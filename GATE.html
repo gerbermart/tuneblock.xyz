@@ -55,6 +55,15 @@
     <script type="text/javascript" src="./sha3.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script type="text/javascript">
+        window.addEventListener('load', function () {
+            if (typeof web3 !== 'undefined') {
+                console.log('Web3 Detected! ' + web3.currentProvider.constructor.name)
+                window.web3 = new Web3(web3.currentProvider);
+            } else {
+                console.log('No Web3 Detected... using HTTP Provider')
+                window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
+            }
+        })
         async function getWaddy(){
             if (typeof window.ethereum !== 'undefined') {
                 console.log('MetaMask is installed!');
@@ -163,7 +172,7 @@
                 if (receipt) {
                     
                     console.log("Gotten receipt")
-                    statusElement.innerHTML = "Gotten receipt"
+                    statusElement.innerHTML = "Gotten receipt:"+receipt+'<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'" target="_blank">'+txHash+'<a/>)</p>'
                     if (receipt.status === true) {
                         console.log(receipt)
                         statusElement.innerHTML = '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'" target="_blank">'+txHash+'<a/>)</p>'
