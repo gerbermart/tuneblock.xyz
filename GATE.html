@@ -53,6 +53,7 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="./sha3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script type="text/javascript">
         async function getWaddy(){
             if (typeof window.ethereum !== 'undefined') {
@@ -163,7 +164,7 @@
                     console.log("Gotten receipt")
                     if (receipt.status === true) {
                         console.log(receipt)
-                        statusElement.innerHTML = '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'">'+txHash+'<a/>)</p>'
+                        statusElement.innerHTML = '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'" target="_blank">'+txHash+'<a/>)</p>'
                     } else if (receipt.status === false) {
                         console.log("Tx failed")
                         statusElement.innerHTML = "Failed"
