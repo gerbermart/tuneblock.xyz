@@ -68,7 +68,7 @@
             $("#waddyid").html('Successfull connection! (Wallet: '+myWaddy+')<br><br>   <span style="color:red;">-->press the same button once more...</span><br>');
         };
         function getOwners(){
-            let contracts=['0xbef7e304a68eb5f9c56fc52d6de3acf5a8e15dc6'];
+            let contracts=['0xa96d903ea253fb413c73553f901ea5a5c1aa2910'];
             let token_trackers=['TUNES'];
 
             for (k=0;k<3;k++){
@@ -112,7 +112,6 @@
                             if ((testWaddy!='') & (address_list.includes(testWaddy))){
                                 if (current_token!=token_tracker){
                                     text+='<br>SUCCESS: '+token_tracker+' unlocked!';
-                                    text+='<br><p><img src="IMAGES/RICK.gif" width="500"></p>'
                                     current_token=token_tracker;
                                 }
                                 $("#msgid").html(text);
@@ -130,6 +129,7 @@
             };
         };
         function mintButton(){
+            console.log("Minting...")
             ethereum
                 .request({
                 method: 'eth_sendTransaction',
@@ -142,9 +142,39 @@
                     },
                 ],
                 })
-                .then((txHash) => console.log(txHash))
+                .then((txHash) => checkTx(txHash))
                 .catch((error) => console.error);
         }
+        function checkTx(txHash) {
+        let statusElement = document.getElementById("tx-status")
+
+        // Log which tx hash we're checking
+        console.log("Waiting for tx " + txHash)
+        statusElement.innerHTML = "Waiting"
+
+        // Set interval to regularly check if we can get a receipt
+        let interval = setInterval(() => {
+
+            web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
+
+                // If we've got a receipt, check status and log / change text accordingly
+                if (receipt) {
+                    
+                    console.log("Gotten receipt")
+                    if (receipt.status === true) {
+                        console.log(receipt)
+                        statusElement.innerHTML = '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'">'+txHash+'<a/>)</p>'
+                    } else if (receipt.status === false) {
+                        console.log("Tx failed")
+                        statusElement.innerHTML = "Failed"
+                    }
+
+                    // Clear interval
+                    clearInterval(interval)
+                }
+            })
+        }, 1000)
+    }
         function makeButtons(){
             $("#TUNESid").html('<button class="locked_button">TUNES Archive Locked</button>');
         }
@@ -167,6 +197,7 @@
 <br><br>
 Mint Quantity: <input type="number" id="quantity" name="quantity" min="1" value="1">
 <button type="button" class="connect_button" onClick="mintButton();">Mint a TUNES on Goerli (not ETH!)</button>
+<p id="tx-status">Waiting for a tx to be submitted</p>
 <br><br>
 <button type="button" class="connect_button" onClick="getOwners();">Check Wallet for NFT Keys</button>
 
