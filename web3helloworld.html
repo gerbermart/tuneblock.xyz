@@ -2,15 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://unpkg.com/web3@latest/dist/web3.min.js"></script>
+    <script type="text/javascript" src="./node_modules/web3/dist/web3.min.js"></script>
     <script type="text/javascript">
         window.addEventListener('load', function () {
             if (typeof web3 !== 'undefined') {
                 console.log('Web3 Detected! ' + web3.currentProvider.constructor.name)
                 window.web3 = new Web3(web3.currentProvider);
+                web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
             } else {
                 console.log('No Web3 Detected... using HTTP Provider')
                 window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
+                web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
             }
         })
         function getBalance() {
