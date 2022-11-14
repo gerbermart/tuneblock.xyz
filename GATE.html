@@ -58,6 +58,39 @@
         window.addEventListener('load', function () {
             window.web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
         })
+        function loopcheck() {
+            var interval = setInterval(function(){ 
+                checkTXN();
+                
+            }, 1000);
+            setTimeout(function() { 
+                document.getElementById("output").innerHTML = 'TXN query timed out...'
+                clearInterval(interval); 
+            }, 120000);
+            
+        }
+
+        function checkTXN(txHash) {
+            var wei, balance
+            try {
+                web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
+
+                    document.getElementById("output").innerHTML = 'Checking TXN: '+txHash;
+
+                    // If we've got a receipt, check status and log / change text accordingly
+                    if (receipt.status===true) {
+                        
+                        document.getElementById("output").innerHTML = 'TXN complete '+txHash;
+                        
+                    }
+                    else if (receipt.status === false) {
+                        document.getElementById("output").innerHTML = 'TXN failed '+txHash;
+                    }
+                });
+            } catch (err) {
+                document.getElementById("output").innerHTML = err;
+            }
+        }
         async function getWaddy(){
             if (typeof window.ethereum !== 'undefined') {
                 console.log('MetaMask is installed!');
@@ -149,37 +182,7 @@
                 .then((txHash) => checkTx(txHash))
                 .catch((error) => console.error);
         }
-        function checkTx(txHash) {
-            let statusElement = document.getElementById("tx-status")
-
-            // Log which tx hash we're checking
-            console.log("Waiting for tx " + txHash)
-            statusElement.innerHTML = "Waiting for tx <a href='https://goerli.etherscan.io/tx/"+txHash+"' target='_blank'>"+txHash+"<a/>"
-
-            // Set interval to regularly check if we can get a receipt
-            let interval = setInterval(checknow(), 1000)
-        }
-        function checknow(){
-            web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
-
-                // If we've got a receipt, check status and log / change text accordingly
-                if (receipt) {
-                    
-                    console.log("Gotten receipt")
-                    statusElement.innerHTML = "Gotten receipt:"+receipt+'<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'" target="_blank">'+txHash+'<a/>)</p>'
-                    if (receipt.status === true) {
-                        console.log(receipt)
-                        statusElement.innerHTML = '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'" target="_blank">'+txHash+'<a/>)</p>'
-                    } else if (receipt.status === false) {
-                        console.log("Tx failed")
-                        statusElement.innerHTML = "Failed"
-                    }
-
-                    // Clear interval
-                    clearInterval(interval)
-                }
-            })
-        }
+        
         function makeButtons(){
             $("#TUNESid").html('<button class="locked_button">TUNES Archive Locked</button>');
         }

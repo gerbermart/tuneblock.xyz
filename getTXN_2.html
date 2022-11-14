@@ -7,8 +7,19 @@
         window.addEventListener('load', function () {
             window.web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
         })
-        
-        function getTXN() {
+        function loopcheck() {
+            var interval = setInterval(function(){ 
+                checkTXN();
+                
+            }, 1000);
+            setTimeout(function() { 
+                document.getElementById("output").innerHTML = 'TXN query timed out...'
+                clearInterval(interval); 
+            }, 120000);
+            
+        }
+
+        function checkTXN() {
             var txHash, wei, balance
             txHash = document.getElementById("txHash").value
             try {
@@ -20,6 +31,7 @@
                     if (receipt.status===true) {
                         
                         document.getElementById("output").innerHTML = 'TXN complete '+txHash;
+                        
                     }
                     else if (receipt.status === false) {
                         document.getElementById("output").innerHTML = 'TXN failed '+txHash;
@@ -35,7 +47,7 @@
     <h1>ETH Balance Fetcher</h1>
     <p>Enter your Ethereum TXN:</p>
     <input type="text" size="50" id="txHash" />
-    <button type="button" onClick="getTXN();">Get TXN status</button>
+    <button type="button" onClick="loopcheck();">Get TXN status</button>
     <br />
     <br />
     <div id="output"></div>
