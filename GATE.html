@@ -154,27 +154,28 @@
             statusElement.innerHTML = "Waiting for tx <a href='https://goerli.etherscan.io/tx/"+txHash+"' target='_blank'>"+txHash+"<a/>"
 
             // Set interval to regularly check if we can get a receipt
-            let interval = setInterval(() => {
+            let interval = setInterval(checknow(), 1000)
+        }
+        function checknow(){
+            web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
 
-                web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
-
-                    // If we've got a receipt, check status and log / change text accordingly
-                    if (receipt) {
-                        
-                        console.log("Gotten receipt")
-                        if (receipt.status === true) {
-                            console.log(receipt)
-                            statusElement.innerHTML = 'Success!'
-                        } else if (receipt.status === false) {
-                            console.log("Tx failed")
-                            statusElement.innerHTML = "Failed"
-                        }
-
-                        // Clear interval
-                        clearInterval(interval)
+                // If we've got a receipt, check status and log / change text accordingly
+                if (receipt) {
+                    
+                    console.log("Gotten receipt")
+                    statusElement.innerHTML = "Gotten receipt"
+                    if (receipt.status === true) {
+                        console.log(receipt)
+                        statusElement.innerHTML = '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br><p>Mint successful (<a href="https://goerli.etherscan.io/tx/'+txHash+'" target="_blank">'+txHash+'<a/>)</p>'
+                    } else if (receipt.status === false) {
+                        console.log("Tx failed")
+                        statusElement.innerHTML = "Failed"
                     }
-                })
-            }, 1000)
+
+                    // Clear interval
+                    clearInterval(interval)
+                }
+            })
         }
         function makeButtons(){
             $("#TUNESid").html('<button class="locked_button">TUNES Archive Locked</button>');
