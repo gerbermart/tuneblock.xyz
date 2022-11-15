@@ -179,7 +179,8 @@
             try {
                 web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
                     
-                    document.getElementById("output").innerHTML = 'Checking TXN: '+txHash;
+                    statusmsg += '<br>Checking TXN: '+txHash;
+                    statusElement.innerHTML = statusmsg
                     
                     // If we've got a receipt, check status and log / change text accordingly
                     if (receipt.status===true) {
