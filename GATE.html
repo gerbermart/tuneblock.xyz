@@ -160,7 +160,7 @@
             
             setTimeout(function() { 
                 if (exitflag===false){
-                    document.getElementById("output").innerHTML = 'TXN query timed out...'
+                    statusElement.innerHTML = 'TXN query timed out...'
                 }
                 clearInterval(intervalID); 
             }, 120000);
@@ -184,20 +184,20 @@
                     // If we've got a receipt, check status and log / change text accordingly
                     if (receipt.status===true) {
                         
-                        document.getElementById("output").innerHTML = 'TXN complete '+txHash;
-                        statusmsg+='<br><p><img src="IMAGES/RICK.gif" width="500"></p><br>';
+                        statusmsg += 'TXN complete '+txHash;
+                        statusmsg += '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br>';
                         statusElement.innerHTML=statusmsg;
                         exitflag=true;
                         clearInterval(intervalID); 
                     }
                     else if (receipt.status === false) {
-                        document.getElementById("output").innerHTML = 'TXN failed '+txHash;
+                        statusElement.innerHTML = 'TXN failed '+txHash;
                         exitflag=true;
                         clearInterval(intervalID); 
                     }
                 });
             } catch (err) {
-                document.getElementById("output").innerHTML = err;
+                statusElement.innerHTML = err;
                 exitflag=true;
                 clearInterval(intervalID); 
             }
