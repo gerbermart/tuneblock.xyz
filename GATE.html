@@ -155,7 +155,7 @@
             exitflag=false;
             checkTXN(txHash);
             if (exitflag===false){
-                intervalID = setInterval(checkTXN(txHash), 2000);
+                intervalID = setInterval(function(){checkTXN(txHash);}, 2000);
             }
             
             setTimeout(function() { 
