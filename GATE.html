@@ -179,13 +179,11 @@
             try {
                 web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
                     
-                    statusmsg += '<br>Checking TXN: '+txHash;
-                    statusElement.innerHTML = statusmsg
                     
                     // If we've got a receipt, check status and log / change text accordingly
                     if (receipt.status===true) {
                         
-                        statusmsg += 'TXN complete '+txHash;
+                        statusmsg += '<br> Mint complete! (check on <a href="https://goerli.etherscan.io/tx/'+txHash+'" target="_blank">Etherscan<a/>)';
                         statusmsg += '<br><p><img src="IMAGES/RICK.gif" width="500"></p><br>';
                         statusElement.innerHTML=statusmsg;
                         exitflag=true;
