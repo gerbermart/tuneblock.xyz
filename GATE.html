@@ -58,6 +58,9 @@
         window.addEventListener('load', function () {
             window.web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
         })
+        var intervalID;
+        var exitflag;
+        var txHash;
         async function getWaddy(){
             if (typeof window.ethereum !== 'undefined') {
                 console.log('MetaMask is installed!');
@@ -146,10 +149,10 @@
                         },
                     ],
                 })
-                .then((txHash) => loopcheck(txHash))
+                .then((txHash) => loopcheck())
                 .catch((error) => console.error);
         }
-        function loopcheck(txHash) {
+        function loopcheck() {
             exitflag=false;
             checkTXN();
             if (exitflag===false){
