@@ -145,7 +145,7 @@
                         from: ethereum.selectedAddress,
                         to: '0x50df8Cc2d87dF54415D145e79C8Ce7248A511513',
                         value: '0x'+(document.getElementById('quantity').value*1000000000000000).toString(16),
-                        data: '0x702e499'+(document.getElementById('quantity').value*1000000000000000).toString(16).padStart(65, '0'),
+                        data: '0x702e499'+(document.getElementById('quantity').value).toString(16).padStart(65, '0'),
                         },
                     ],
                 })
