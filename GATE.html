@@ -75,7 +75,7 @@
             $("#waddyid").html('Successfull connection! (Wallet: '+myWaddy+')<br><br>   <span style="color:red;">-->press the same button once more...</span><br>');
         };
         function getOwners(){
-            let contracts=['0xf2785dd9fe5e539961886058d740153d8dfba697'];
+            let contracts=['0x50df8Cc2d87dF54415D145e79C8Ce7248A511513'];
             let token_trackers=['TUNES'];
 
             for (k=0;k<3;k++){
@@ -143,9 +143,9 @@
                     params: [
                         {
                         from: ethereum.selectedAddress,
-                        to: '0xf2785dd9fe5e539961886058d740153d8dfba697',
+                        to: '0x50df8Cc2d87dF54415D145e79C8Ce7248A511513',
                         value: '0x'+(document.getElementById('quantity').value*1000000000000000).toString(16),
-                        data: '0xcd8771ce',
+                        data: '0x702e499'+(document.getElementById('quantity').value*1000000000000000).toString(16).padStart(65, '0'),
                         },
                     ],
                 })
