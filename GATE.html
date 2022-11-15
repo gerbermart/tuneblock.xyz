@@ -175,10 +175,7 @@
             console.log("Waiting for tx " + txHash)
             statusmsg="Waiting for tx <a href='https://goerli.etherscan.io/tx/"+txHash+"' target='_blank'>"+txHash+"<a/>"
             statusElement.innerHTML = statusmsg
-                
-            
-            var txHash
-            txHash = document.getElementById("txHash").value
+               
             try {
                 web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
                     
@@ -205,23 +202,7 @@
                 clearInterval(intervalID); 
             }
         }
-        function checkTx(txHash) {
-            let statusElement = document.getElementById("tx-status")
-
-            // Log which tx hash we're checking
-            console.log("Waiting for tx " + txHash)
-            statusElement.innerHTML = "Waiting for tx <a href='https://goerli.etherscan.io/tx/"+txHash+"' target='_blank'>"+txHash+"<a/>"
-
-            // Set interval to regularly check if we can get a receipt
-            var interval = setInterval(function(){ 
-                checkTXN();
-                
-            }, 1000);
-            setTimeout(function() { 
-                document.getElementById("output").innerHTML = 'TXN query timed out...'
-                clearInterval(interval); 
-            }, 120000);
-        }
+        
         function makeButtons(){
             $("#TUNESid").html('<button class="locked_button">TUNES Archive Locked</button>');
         }
