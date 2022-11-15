@@ -151,7 +151,7 @@
                 .then((txHash) => loopcheck(txHash))
                 .catch((error) => console.error);
         }
-        function loopcheck() {
+        function loopcheck(txHash) {
             exitflag=false;
             checkTXN(txHash);
             if (exitflag===false){
