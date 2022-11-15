@@ -60,7 +60,6 @@
         })
         var intervalID;
         var exitflag;
-        var txHash;
         async function getWaddy(){
             if (typeof window.ethereum !== 'undefined') {
                 console.log('MetaMask is installed!');
@@ -149,14 +148,14 @@
                         },
                     ],
                 })
-                .then((txHash) => loopcheck())
+                .then((txHash) => loopcheck(txHash))
                 .catch((error) => console.error);
         }
         function loopcheck() {
             exitflag=false;
-            checkTXN();
+            checkTXN(txHash);
             if (exitflag===false){
-                intervalID = setInterval(checkTXN, 2000);
+                intervalID = setInterval(checkTXN(txHash), 2000);
             }
             
             setTimeout(function() { 
@@ -168,7 +167,7 @@
             
         }
 
-        function checkTXN() {
+        function checkTXN(txHash) {
 
             let statusElement = document.getElementById("tx-status")
 
