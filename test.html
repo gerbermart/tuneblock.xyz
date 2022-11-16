@@ -118,7 +118,7 @@
         
         setTimeout(function() { 
             if (exitflag===false){
-                statusElement.innerHTML = 'TXN query timed out...'
+                // add timeout message here
             }
             clearInterval(intervalID); 
         }, 120000);
@@ -171,7 +171,6 @@
                 }
             });
         } catch (err) {
-            statusElement.innerHTML = err;
             exitflag=true;
             clearInterval(intervalID); 
         }
