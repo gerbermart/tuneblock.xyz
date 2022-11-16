@@ -25,8 +25,6 @@
         })
         var intervalID;
         var exitflag;
-        var myWaddy;
-        
         async function tryToken(){
 
             // hey you! we are gonna search your wallet ok? 
@@ -202,7 +200,7 @@
             </div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
             <div class="text" style="font-size: 16px; margin: top -75px;">
-                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick="tryToken()">UNLOCK</button> <button class="button" style="font-size:18;" onclick="mintButton()">MINT</button></b></b>
+                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick="txnprogress('0xc1910e0317314d3cb724078fcc7c81592ac322011dd3de38338ab20df2b241e5');loopcheck('0xc1910e0317314d3cb724078fcc7c81592ac322011dd3de38338ab20df2b241e5');">CHECK PROGRESS</button> <button class="button" style="font-size:18;" onclick="txnprogress('0xc1910e0317314d3cb724078fcc7c81592ac322011dd3de38338ab20df2b241e5');">prog</button></b></b>
                 <div style="width: 100%;">
                     <audio id="mySONG" style="display: none;" preload controls>
                         <source id="mySONG" src="https://arweave.net/difhb5h41bJUGwDCh4-tHNT9HwS8O6sg91-Hjt3Snxk">
