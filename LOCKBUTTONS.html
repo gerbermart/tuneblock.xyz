@@ -2,9 +2,11 @@
     <head>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript">
-        var address_list=["0x7e8c38ad50622c0b26906c9cf81d2825fc78a38b","0x7e8c38ad50622c0b26906c9cf81d2825fc78a38b"];
         var myWaddy;
         async function tryToken(){
+
+            // hey you! we are gonna search your wallet ok? 
+
             if (typeof window.ethereum !== 'undefined') {
                 console.log('MetaMask is installed!');
             }
@@ -12,12 +14,64 @@
             const account = accounts[0];
             myWaddy=account.toLowerCase();
             $("#waddyid").html('Successfull connection! (Wallet: '+myWaddy+')');
-            if (address_list.includes(myWaddy)){
-                document.getElementById('btn').disabled = false;
-            } else {
-                document.getElementById('btn').disabled = true;
-            }
-        }
+
+            // add in the bit where we check the token owners
+
+            let contracts=['0x911f20435814ad9d418502fef3543f38be58e73b'];
+            let token_trackers=['TUNES'];
+            let address_list=[];
+
+            for (k=0;k<contracts.length;k++){
+                let contract=contracts[k];
+                let token_tracker=token_trackers[k];
+            
+                text='';
+                addresses='';
+                current_token='';
+                
+                let testWaddy = myWaddy.toLowerCase();
+                stopper='no';
+                for (let i=1;((i<100) & (stopper=='no'));i++){
+                    
+                    const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
+                    const settings = {
+                    async: true,
+                    crossDomain: true,
+                    url: url_str,
+                    method: 'GET',
+                    headers: {}
+                    };
+                
+                    $(document).ready(function(){
+                        $("#msgid").html('doin stuff...');
+                        $.ajax(settings).done(function (response) {
+                            
+                            const json = JSON.stringify(response).replace(/[\r\n]/gm, '');
+                            
+                            const obj = JSON.parse(json);
+                            
+                            if (obj.length==0){
+                                stopper='no';
+                            }
+                            
+                            for (let j = 0; j < obj.owners.length; j++) {
+                            //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
+                            addresses+=obj.owners[j].owner.address.toString()+','
+                            } 
+                            address_list += addresses.split(',')
+
+                            if (address_list.includes(myWaddy)){
+                                document.getElementById('btn').disabled = false;
+                            } else {
+                                document.getElementById('btn').disabled = true;
+                            }
+                              
+                        });
+                        
+                    });
+                };
+            };
+        };
         function showRick(){
             $("#waddyid").html('<br><p><img src="IMAGES/RICK.gif" width="500"></p><br>');
         }
