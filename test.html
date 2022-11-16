@@ -91,7 +91,7 @@
         };
     };
     function mintButton(){
-        var nummints=prompt("Enter number of tokens to mint",1);
+        var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
         console.log("Minting...")
         ethereum
             .request({
