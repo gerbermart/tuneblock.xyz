@@ -3,7 +3,7 @@ body {
 }
 
 .button {
-  background-color: black; /* Green */
+  background-color: black; 
   border: none;
   color: white;
   padding: 5px 15px;
@@ -15,9 +15,15 @@ body {
 }
 
 /* mouse over link */
-button:hover {
+button:hover:enabled {
   background-color: #2a9e00;
   color: black;
+}
+
+/* mouse over link */
+button:hover:disabled {
+  background-color: #b81001;
+  color: white;
 }
 
 .DISABLED_button {
