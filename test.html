@@ -43,9 +43,9 @@
                     var fn_chk = window[funcpass];
 
                     // is object a function?
-                    if (typeof fn === "function") fn();
+                    if (typeof fn_chk === "function") fn_chk();
                 } else {
-                    prompt('Change to Görli network and try again...')
+                    alert('Change to Görli network and try again...')
                 }
             } 
         }
