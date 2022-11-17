@@ -40,10 +40,9 @@
                 if (chainId==='0x5') {
                     //continue
                     // find object
-                    var fn_chk = window[funcpass];
+                    var fn = window[funcpass];
 
-                    // is object a function?
-                    if (typeof fn_chk === "function") fn_chk();
+                    fn();
                 } else {
                     alert('Change to Görli network and try again...')
                 }
@@ -328,7 +327,7 @@
             </div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
             <div class="text" style="font-size: 16px; margin: top -75px;">
-                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick="chainCheck('tryToken')">UNLOCK</button> <button class="button" style="font-size:18;" onclick="chainCheck('mintButton')">MINT</button></b></b>
+                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick='chainCheck("tryToken");'>UNLOCK</button> <button class="button" style="font-size:18;" onclick='chainCheck("mintButton");'>MINT</button></b></b>
                 <div style="width: 100%;">
                     <audio autoplay id="mySONG" onended="nextsong()"  style="display: none;" preload controls>
                         <source id="mySONG" src="https://arweave.net/difhb5h41bJUGwDCh4-tHNT9HwS8O6sg91-Hjt3Snxk">
