@@ -38,100 +38,121 @@
                 const chainId = await provider.request({
                     method: 'eth_chainId'
                 });
-                prompt(chainId);
+                
             } 
 
-            // hey you! we are gonna search your wallet ok? 
+            if (chainId!='0x5') {
+                prompt('Change to Görli network and try again...')
+            } else {
 
-            if (typeof window.ethereum !== 'undefined') {
-                console.log('MetaMask is installed!');
-            }
-            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            const account = accounts[0];
-            myWaddy=account.toLowerCase();
+                // hey you! we are gonna search your wallet ok? 
 
-            // add in the bit where we check the token owners
+                if (typeof window.ethereum !== 'undefined') {
+                    console.log('MetaMask is installed!');
+                }
+                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                const account = accounts[0];
+                myWaddy=account.toLowerCase();
 
-            let contracts=['0x911f20435814ad9d418502fef3543f38be58e73b'];
-            let token_trackers=['TUNES'];
-            let address_list=[];
+                // add in the bit where we check the token owners
 
-            for (k=0;k<contracts.length;k++){
-                let contract=contracts[k];
-                let token_tracker=token_trackers[k];
-            
-                text='';
-                addresses='';
-                current_token='';
+                let contracts=['0x911f20435814ad9d418502fef3543f38be58e73b'];
+                let token_trackers=['TUNES'];
+                let address_list=[];
+
+                for (k=0;k<contracts.length;k++){
+                    let contract=contracts[k];
+                    let token_tracker=token_trackers[k];
                 
-                let testWaddy = myWaddy.toLowerCase();
-                stopper='no';
-                for (let i=1;((i<100) & (stopper=='no'));i++){
+                    text='';
+                    addresses='';
+                    current_token='';
                     
-                    const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
-                    const settings = {
-                    async: true,
-                    crossDomain: true,
-                    url: url_str,
-                    method: 'GET',
-                    headers: {}
-                    };
-                
-                    $(document).ready(function(){
-                        $("#msgid").html('doin stuff...');
-                        $.ajax(settings).done(function (response) {
-                            
-                            const json = JSON.stringify(response).replace(/[\r\n]/gm, '');
-                            
-                            const obj = JSON.parse(json);
-                            
-                            if (obj.length==0){
-                                stopper='no';
-                            }
-                            
-                            for (let j = 0; j < obj.owners.length; j++) {
-                            //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
-                            addresses+=obj.owners[j].owner.address.toString()+','
-                            } 
-                            address_list += addresses.split(',')
+                    let testWaddy = myWaddy.toLowerCase();
+                    stopper='no';
+                    for (let i=1;((i<100) & (stopper=='no'));i++){
+                        
+                        const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
+                        const settings = {
+                        async: true,
+                        crossDomain: true,
+                        url: url_str,
+                        method: 'GET',
+                        headers: {}
+                        };
+                    
+                        $(document).ready(function(){
+                            $("#msgid").html('doin stuff...');
+                            $.ajax(settings).done(function (response) {
+                                
+                                const json = JSON.stringify(response).replace(/[\r\n]/gm, '');
+                                
+                                const obj = JSON.parse(json);
+                                
+                                if (obj.length==0){
+                                    stopper='no';
+                                }
+                                
+                                for (let j = 0; j < obj.owners.length; j++) {
+                                //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
+                                addresses+=obj.owners[j].owner.address.toString()+','
+                                } 
+                                address_list += addresses.split(',')
 
-                            if (address_list.includes(myWaddy)){
-                                var elems = document.getElementsByClassName("button");
-                                for(var i = 0; i < elems.length; i++) {
-                                    elems[i].disabled = false;
+                                if (address_list.includes(myWaddy)){
+                                    var elems = document.getElementsByClassName("button");
+                                    for(var i = 0; i < elems.length; i++) {
+                                        elems[i].disabled = false;
+                                    }
+                                } else {
+                                    var elems = document.getElementsByClassName("button");
+                                    for(var i = 0; i < elems.length; i++) {
+                                        elems[i].disabled = true;
+                                    }
                                 }
-                            } else {
-                                var elems = document.getElementsByClassName("button");
-                                for(var i = 0; i < elems.length; i++) {
-                                    elems[i].disabled = true;
-                                }
-                            }
+                                
+                            });
                             
                         });
-                        
-                    });
+                    };
                 };
             };
         };
         function mintButton(){
-            tryToken();
-            var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
-            console.log("Minting...")
-            ethereum
-                .request({
-                    method: 'eth_sendTransaction',
-                    params: [
-                        {
-                        from: ethereum.selectedAddress,
-                        to: '0x911f20435814ad9d418502fef3543f38be58e73b',
-                        value: '0x'+(nummints*1000000000000000).toString(16),
-                        data: '0x702e499'+(nummints).toString(16).padStart(65, '0'),
-                        },
-                    ],
-                })
-                .then((txHash) => loopcheck(txHash))
-                .catch((error) => console.error);
-        }
+            // before we start, let's get on the right chain
+            
+            const provider = await detectEthereumProvider()
+
+            if (provider) {
+                // handle provider
+                const chainId = await provider.request({
+                    method: 'eth_chainId'
+                });
+                
+            } 
+
+            if (chainId!='0x5') {
+                prompt('Change to Görli network and try again...')
+            } else {
+                tryToken();
+                var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
+                console.log("Minting...")
+                ethereum
+                    .request({
+                        method: 'eth_sendTransaction',
+                        params: [
+                            {
+                            from: ethereum.selectedAddress,
+                            to: '0x911f20435814ad9d418502fef3543f38be58e73b',
+                            value: '0x'+(nummints*1000000000000000).toString(16),
+                            data: '0x702e499'+(nummints).toString(16).padStart(65, '0'),
+                            },
+                        ],
+                    })
+                    .then((txHash) => loopcheck(txHash))
+                    .catch((error) => console.error);
+            };        
+        };
         function loopcheck(txHash) {
             txnprogress(txHash);
             exitflag=false;
