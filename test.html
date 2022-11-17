@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
     <script src="./web3.min.js"></script>
     <script type="text/javascript">
         window.addEventListener('load', function () {
@@ -27,6 +28,18 @@
         var exitflag;
         var myWaddy;
         async function tryToken(){
+
+            // before we start, let's get on the right chain
+            
+            const provider = await detectEthereumProvider()
+
+            if (provider) {
+                // handle provider
+                const chainId = await provider.request({
+                    method: 'eth_chainId'
+                });
+                prompt(chainId);
+            } 
 
             // hey you! we are gonna search your wallet ok? 
 
