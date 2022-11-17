@@ -27,8 +27,7 @@
         var intervalID;
         var exitflag;
         var myWaddy;
-        async function tryToken(){
-
+        async function chainCheck(funcpass){
             // before we start, let's get on the right chain
             
             const provider = await detectEthereumProvider()
@@ -38,121 +37,111 @@
                 const chainId = await provider.request({
                     method: 'eth_chainId'
                 });
-                
-            } 
+                if (chainId==='0x5') {
+                    //continue
+                    // find object
+                    var fn_chk = window[funcpass];
 
-            if (chainId!='0x5') {
-                prompt('Change to Görli network and try again...')
-            } else {
-
-                // hey you! we are gonna search your wallet ok? 
-
-                if (typeof window.ethereum !== 'undefined') {
-                    console.log('MetaMask is installed!');
+                    // is object a function?
+                    if (typeof fn === "function") fn();
+                } else {
+                    prompt('Change to Görli network and try again...')
                 }
-                const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-                const account = accounts[0];
-                myWaddy=account.toLowerCase();
+            } 
+        }
+        async function tryToken(){
 
-                // add in the bit where we check the token owners
+            // hey you! we are gonna search your wallet ok? 
 
-                let contracts=['0x911f20435814ad9d418502fef3543f38be58e73b'];
-                let token_trackers=['TUNES'];
-                let address_list=[];
+            if (typeof window.ethereum !== 'undefined') {
+                console.log('MetaMask is installed!');
+            }
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            const account = accounts[0];
+            myWaddy=account.toLowerCase();
 
-                for (k=0;k<contracts.length;k++){
-                    let contract=contracts[k];
-                    let token_tracker=token_trackers[k];
+            // add in the bit where we check the token owners
+
+            let contracts=['0x911f20435814ad9d418502fef3543f38be58e73b'];
+            let token_trackers=['TUNES'];
+            let address_list=[];
+
+            for (k=0;k<contracts.length;k++){
+                let contract=contracts[k];
+                let token_tracker=token_trackers[k];
+            
+                text='';
+                addresses='';
+                current_token='';
                 
-                    text='';
-                    addresses='';
-                    current_token='';
+                let testWaddy = myWaddy.toLowerCase();
+                stopper='no';
+                for (let i=1;((i<100) & (stopper=='no'));i++){
                     
-                    let testWaddy = myWaddy.toLowerCase();
-                    stopper='no';
-                    for (let i=1;((i<100) & (stopper=='no'));i++){
-                        
-                        const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
-                        const settings = {
-                        async: true,
-                        crossDomain: true,
-                        url: url_str,
-                        method: 'GET',
-                        headers: {}
-                        };
-                    
-                        $(document).ready(function(){
-                            $("#msgid").html('doin stuff...');
-                            $.ajax(settings).done(function (response) {
-                                
-                                const json = JSON.stringify(response).replace(/[\r\n]/gm, '');
-                                
-                                const obj = JSON.parse(json);
-                                
-                                if (obj.length==0){
-                                    stopper='no';
-                                }
-                                
-                                for (let j = 0; j < obj.owners.length; j++) {
-                                //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
-                                addresses+=obj.owners[j].owner.address.toString()+','
-                                } 
-                                address_list += addresses.split(',')
+                    const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
+                    const settings = {
+                    async: true,
+                    crossDomain: true,
+                    url: url_str,
+                    method: 'GET',
+                    headers: {}
+                    };
+                
+                    $(document).ready(function(){
+                        $("#msgid").html('doin stuff...');
+                        $.ajax(settings).done(function (response) {
+                            
+                            const json = JSON.stringify(response).replace(/[\r\n]/gm, '');
+                            
+                            const obj = JSON.parse(json);
+                            
+                            if (obj.length==0){
+                                stopper='no';
+                            }
+                            
+                            for (let j = 0; j < obj.owners.length; j++) {
+                            //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
+                            addresses+=obj.owners[j].owner.address.toString()+','
+                            } 
+                            address_list += addresses.split(',')
 
-                                if (address_list.includes(myWaddy)){
-                                    var elems = document.getElementsByClassName("button");
-                                    for(var i = 0; i < elems.length; i++) {
-                                        elems[i].disabled = false;
-                                    }
-                                } else {
-                                    var elems = document.getElementsByClassName("button");
-                                    for(var i = 0; i < elems.length; i++) {
-                                        elems[i].disabled = true;
-                                    }
+                            if (address_list.includes(myWaddy)){
+                                var elems = document.getElementsByClassName("button");
+                                for(var i = 0; i < elems.length; i++) {
+                                    elems[i].disabled = false;
                                 }
-                                
-                            });
+                            } else {
+                                var elems = document.getElementsByClassName("button");
+                                for(var i = 0; i < elems.length; i++) {
+                                    elems[i].disabled = true;
+                                }
+                            }
                             
                         });
-                    };
+                        
+                    });
                 };
             };
         };
         function mintButton(){
-            // before we start, let's get on the right chain
-            
-            const provider = await detectEthereumProvider()
-
-            if (provider) {
-                // handle provider
-                const chainId = await provider.request({
-                    method: 'eth_chainId'
-                });
-                
-            } 
-
-            if (chainId!='0x5') {
-                prompt('Change to Görli network and try again...')
-            } else {
-                tryToken();
-                var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
-                console.log("Minting...")
-                ethereum
-                    .request({
-                        method: 'eth_sendTransaction',
-                        params: [
-                            {
-                            from: ethereum.selectedAddress,
-                            to: '0x911f20435814ad9d418502fef3543f38be58e73b',
-                            value: '0x'+(nummints*1000000000000000).toString(16),
-                            data: '0x702e499'+(nummints).toString(16).padStart(65, '0'),
-                            },
-                        ],
-                    })
-                    .then((txHash) => loopcheck(txHash))
-                    .catch((error) => console.error);
-            };        
-        };
+            tryToken();
+            var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
+            console.log("Minting...")
+            ethereum
+                .request({
+                    method: 'eth_sendTransaction',
+                    params: [
+                        {
+                        from: ethereum.selectedAddress,
+                        to: '0x911f20435814ad9d418502fef3543f38be58e73b',
+                        value: '0x'+(nummints*1000000000000000).toString(16),
+                        data: '0x702e499'+(nummints).toString(16).padStart(65, '0'),
+                        },
+                    ],
+                })
+                .then((txHash) => loopcheck(txHash))
+                .catch((error) => console.error);
+        }
         function loopcheck(txHash) {
             txnprogress(txHash);
             exitflag=false;
@@ -339,7 +328,7 @@
             </div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
             <div class="text" style="font-size: 16px; margin: top -75px;">
-                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick="tryToken()">UNLOCK</button> <button class="button" style="font-size:18;" onclick="mintButton()">MINT</button></b></b>
+                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick="chainCheck('tryToken')">UNLOCK</button> <button class="button" style="font-size:18;" onclick="chainCheck('mintButton')">MINT</button></b></b>
                 <div style="width: 100%;">
                     <audio autoplay id="mySONG" onended="nextsong()"  style="display: none;" preload controls>
                         <source id="mySONG" src="https://arweave.net/difhb5h41bJUGwDCh4-tHNT9HwS8O6sg91-Hjt3Snxk">
