@@ -25,6 +25,8 @@
         })
         var intervalID;
         var exitflag;
+        var myWaddy;
+        
         async function tryToken(){
 
             // hey you! we are gonna search your wallet ok? 
@@ -181,6 +183,10 @@
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='TRANSACTION REVERTED ('+err+'): <br><button class="button" onclick="mintButton();" style="font-size:12;">TRY AGAIN</button> OR <a href="https://twitter.com/martin_gerber"><button class="button" style="font-size:12;" target="_blank">CONTACT GERBS</button></a>'; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/CONTACT.png'; document.getElementById('myHREF').href='https://twitter.com/martin_gerber'; document.getElementById('myLOADING').src='';
                         
         }
+        var audio1 = document.getElementById("mySONG");
+        audio1.onended = function() {
+            alert("audio playback has ended");
+        };
     </script>
 </head>
 
@@ -200,7 +206,7 @@
             </div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
             <div class="text" style="font-size: 16px; margin: top -75px;">
-                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick="txnprogress('0xc1910e0317314d3cb724078fcc7c81592ac322011dd3de38338ab20df2b241e5');loopcheck('0xc1910e0317314d3cb724078fcc7c81592ac322011dd3de38338ab20df2b241e5');">CHECK PROGRESS</button> <button class="button" style="font-size:18;" onclick="txnprogress('0xc1910e0317314d3cb724078fcc7c81592ac322011dd3de38338ab20df2b241e5');">prog</button></b></b>
+                <b id="myTXT">  <b style='font-size:32;'><button disabled class="button">&#9655</button> <button class="button" style="font-size:18;" onclick="tryToken()">UNLOCK</button> <button class="button" style="font-size:18;" onclick="mintButton()">MINT</button></b></b>
                 <div style="width: 100%;">
                     <audio id="mySONG" style="display: none;" preload controls>
                         <source id="mySONG" src="https://arweave.net/difhb5h41bJUGwDCh4-tHNT9HwS8O6sg91-Hjt3Snxk">
