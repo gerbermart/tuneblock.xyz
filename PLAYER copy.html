@@ -380,7 +380,8 @@
             </div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
             <div class="text" style="font-size: 16px; margin: top -75px;">
-                <b id="myTXT">  <b style='font-size:32;'><button onclick="chainCheck('tryToken');" class="button">&#9655</button> <img src="IMAGES/TUNEBLOCK_BLACK.png" width="230" style="position: absolute; margin-left:10; margin-top:-30;"></b></b>
+                <b id="myTXT">  <b style='font-size:32;'><button onclick="nextsong();" class="button">&#9655</button><img src="IMAGES/TUNEBLOCK_BLACK.png" width="230" style="position: absolute; margin-left:10; margin-top:-30;"></div> </b></b>
+                
                 <div style="width: 100%;">
                     <audio autoplay id="mySONG" onended="nextsong()"  style="display: none;" preload ontimeupdate="document.getElementById('tracktime').innerHTML = Math.floor(this.currentTime/60) + ':' + Math.floor(this.currentTime-Math.floor(this.currentTime/60)*60+1) + ' / ' + Math.floor(this.duration/60) + ':' + Math.floor(this.duration-Math.floor(this.duration/60)*60+1);">
                         <source id="mySONG" src="">
@@ -388,9 +389,7 @@
                     </audio> 
                 </div>
             </div>
-            <a class="box-link" id="myHREF" href="./IMAGES/HOWTO_PLAYER.png" target="_blank"></a>
         </div>
-        
     </div>
 </body>
 
