@@ -117,11 +117,8 @@
                                 address_list += addresses.split(',')
 
                                 if (address_list.includes(myWaddy)){
-                                    var elems = document.getElementsByClassName("button");
-                                    for(var ii = 0; ii < elems.length; ii++) {
-                                        elems[ii].disabled = false;
-                                        outcome='success';
-                                    }
+                                    unlock_the_buttons();
+                                    outcome='success';
                                 } 
                             
                                 setTimeout(function() {
@@ -151,6 +148,13 @@
             //setTimeout(function() {if (outcome==='undetermined'){unlock_failure();}},1)
             
         };
+        function unlock_the_buttons(){
+            var elems = document.getElementsByClassName("button");
+            for(var ii = 0; ii < elems.length; ii++) {
+                elems[ii].disabled = false;
+                
+            }
+        }
         function mintButton(){
             var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
             console.log("Minting...")
@@ -185,7 +189,6 @@
                 clearInterval(intervalID); 
             }, 120000);
             
-            tryToken();
         }
 
         function checkTXN(txHash) {
@@ -200,6 +203,7 @@
                     if (receipt.status===true) {
                         clearInterval(intervalID); 
                         exitflag=true;
+                        unlock_the_buttons();
                         success();
                     }
                     else if (receipt.status === false) {
