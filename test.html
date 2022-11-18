@@ -29,19 +29,13 @@
         var myWaddy;
         async function chainCheck(funcpass){
             // before we start, let's get on the right chain
-            
-            //alert('We are in BETA phase... please make sure you are on the Goerli (not Ethereum) network before minting or ETH may be lost!')
-
-            //var fn = window[funcpass];
-
-            //fn();
 
             const provider = await detectEthereumProvider()
-            if (true){//(provider) {
+            if (provider) {
                 const chainId = await provider.request({
                     method: 'eth_chainId'
                 });
-                //chainId='0x5'
+                chainId='0x5'
                 if (chainId==='0x5') {
                     //var fn = window[funcpass];
                     //fn();
@@ -54,7 +48,6 @@
         }
         async function tryToken(){
             unlock_progress();
-
             // hey you! we are gonna search your wallet ok? 
 
             if (typeof window.ethereum !== 'undefined') {
@@ -63,7 +56,6 @@
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
             myWaddy=account.toLowerCase();
-
             // add in the bit where we check the token owners
 
             let contracts=['0x87aca4cc2fe698e2dd5664934d1669ab2d23ba88'];
@@ -79,11 +71,11 @@
                 current_token='';
                 
                 let testWaddy = myWaddy.toLowerCase();
-                stopper='no';
+                var stopper='no';
 
-                token_limit=3;
+                token_limit=6;
                 time_delta=1500;
-                for (let i=1;i<=token_limit;i++){
+                for (let i=1;(i<=token_limit && stopper=='no');i++){
                     
                     setTimeout(function() {
                         
@@ -127,6 +119,7 @@
                                         setTimeout(function() {document.getElementById('myTXT').innerHTML+='<br>&nbsp->LOADING TRACK...'},1000);
                                         setTimeout(function() {nextsong()},3000);
                                         outcome='done';
+                                        stopper='yes';
                                     } 
                                 },(token_limit+1)*time_delta);
 
@@ -134,6 +127,7 @@
                                     if (outcome!='done'){
                                         unlock_failure();
                                         outcome='failed';
+                                        stopper='yes';
                                     } 
                                 },(token_limit+5)*time_delta);
                                 
