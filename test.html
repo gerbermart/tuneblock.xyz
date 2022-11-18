@@ -30,11 +30,11 @@
         async function chainCheck(funcpass){
             // before we start, let's get on the right chain
 
-            //const provider = await detectEthereumProvider()
+            const provider = await detectEthereumProvider()
             if (true) {
-                const chainId = '0x5'//await provider.request({
-                //    method: 'eth_chainId'
-                //});
+                const chainId = await provider.request({
+                    method: 'eth_chainId'
+                });
                 if (chainId=='0x5') {
                     //var fn = window[funcpass];
                     //fn();
@@ -243,7 +243,7 @@
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='TRANSACTION REVERTED ('+err+'): <br><button class="button" onclick="mintButton();" style="font-size:12;">TRY AGAIN</button> OR <a href="https://twitter.com/martin_gerber"><button class="button" style="font-size:12;" target="_blank">CONTACT GERBS</button></a>'; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/CONTACT.png'; document.getElementById('myHREF').href='https://twitter.com/martin_gerber'; document.getElementById('myLOADING').src='';
                         
         }
-        var funclist = ["play_Wayak","play_Sound_Mechanic","play_Hurric4n3","play_Jadyn_Violet","play_Amy_Correa_Bell","play_Les_Les","play_Evaflow","play_Elameen","play_Dundo","play_Ayotemi","play_Shark_Anthony","play_XAND","play_Martin_Gerber","play_DFreshmaker","play_Serboy","play_Sayten","play_Gx","play_Jack_Frost","play_PinkStar"];
+        var funclist = ["play_Wayak","play_Sound_Mechanic","play_Hurric4n3","play_Jadyn_Violet","play_Amy_Correa_Bell","play_Les_Les","play_Evaflow","play_Elameen","play_Dundo","play_Ayotemi","play_Shark_Anthony","play_XAND","play_Martin_Gerber","play_DFreshmaker","play_Serboy","play_Sayten89","play_Gx","play_Jack_Frost","play_PinkStar"];
         var funclist_mem=funclist;
         function nextsong() {
             // function we want to run
@@ -351,8 +351,8 @@
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='SERBOY - REMEMBER ME'+controls_html;document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://mintsongs.mypinata.cloud/ipfs/QmaFz5fK5TiPRJ3naZZ25JLD6bQtrTMbTLf1bUfQqu9USm'; document.getElementById('myIMG').src='https://mintsongs.mypinata.cloud/ipfs/QmeNL3XBezcvvPDQvSEiHZHmcqtJEPpDtzVvkzPBq8xbCF'; document.getElementById('myHREF').href='https://www.mintsongs.com/editions/82626'
             document.getElementById('myPLAY').play();
         }
-        function play_Sayten() {
-            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='SAYTEN - WILDFLOWER'+controls_html;document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://mintsongs.mypinata.cloud/ipfs/QmXP4Uct8nnL9X6tWqN6iCsjHCrD8tmqCJ9yNzNve2hV8V'; document.getElementById('myIMG').src='https://mintsongs.mypinata.cloud/ipfs/QmagYtx4dEEowDKfWrcANSkom5dWLCtpHbQSLeBmD3vNaU'; document.getElementById('myHREF').href='https://opensea.io/assets?search[query]=sayten89&search[resultModel]=ASSETS'
+        function play_Sayten89() {
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='SAYTEN89 - WILDFLOWER'+controls_html;document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://mintsongs.mypinata.cloud/ipfs/QmXP4Uct8nnL9X6tWqN6iCsjHCrD8tmqCJ9yNzNve2hV8V'; document.getElementById('myIMG').src='https://mintsongs.mypinata.cloud/ipfs/QmagYtx4dEEowDKfWrcANSkom5dWLCtpHbQSLeBmD3vNaU'; document.getElementById('myHREF').href='https://opensea.io/assets?search[query]=sayten89&search[resultModel]=ASSETS'
             document.getElementById('myPLAY').play();
         }
         function play_Gx() {
@@ -504,7 +504,7 @@
         <div class="polaroid">
             <div class="content"><img src="./IMAGES/SAYTEN.jpg"></div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
-            <div class="text"><b><button disabled class="button" onclick="play_Sayten();">&#9655</button><a href="https://wlo.link/@sayten89" target="_blank"> SAYTEN89</a></b></div>
+            <div class="text"><b><button disabled class="button" onclick="play_Sayten89();">&#9655</button><a href="https://wlo.link/@sayten89" target="_blank"> SAYTEN89</a></b></div>
             <a class="box-link" href="https://wlo.link/@sayten89" target="_blank"></a>
         </div>
         <div class="polaroid">
