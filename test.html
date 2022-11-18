@@ -204,7 +204,10 @@
                         clearInterval(intervalID); 
                         exitflag=true;
                         unlock_the_buttons();
-                        success();
+                        document.getElementById('myTXT').innerHTML='MINT COMPLETE! PLAYER UNLOCKED!'
+                        setTimeout(function() {document.getElementById('myTXT').innerHTML+='<br>&nbsp->LOADING TRACK...'},1000);
+                        setTimeout(function() {nextsong()},3000);
+                        
                     }
                     else if (receipt.status === false) {
                         clearInterval(intervalID); 
