@@ -30,30 +30,35 @@
         async function chainCheck(funcpass){
             // before we start, let's get on the right chain
             
-            const provider = await detectEthereumProvider()
+            //alert('We are in BETA phase... please make sure you are on the Goerli (not Ethereum) network before minting or ETH may be lost!')
 
-            if (provider) {
-                // handle provider
+            //var fn = window[funcpass];
+
+            //fn();
+
+            const provider = await detectEthereumProvider()
+            if (true){//(provider) {
                 const chainId = await provider.request({
                     method: 'eth_chainId'
                 });
+                //chainId='0x5'
                 if (chainId==='0x5') {
-                    //continue
-                    // find object
-                    var fn = window[funcpass];
-
-                    fn();
+                    //var fn = window[funcpass];
+                    //fn();
+                    if (funcpass==='tryToken'){tryToken();}
+                    if (funcpass==='mintButton'){mintButton();}
                 } else {
                     alert('Change to Görli network and try again...')
                 }
             } 
         }
         async function tryToken(){
+            unlock_progress();
 
             // hey you! we are gonna search your wallet ok? 
 
             if (typeof window.ethereum !== 'undefined') {
-                console.log('MetaMask is installed!');
+                console.log('Legend.');
             }
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
             const account = accounts[0];
@@ -64,66 +69,89 @@
             let contracts=['0x87aca4cc2fe698e2dd5664934d1669ab2d23ba88'];
             let token_trackers=['TUNES'];
             let address_list=[];
-
+            var outcome = 'undetermined'
             for (k=0;k<contracts.length;k++){
                 let contract=contracts[k];
                 let token_tracker=token_trackers[k];
-            
+                
                 text='';
                 addresses='';
                 current_token='';
                 
                 let testWaddy = myWaddy.toLowerCase();
                 stopper='no';
-                for (let i=1;((i<100) & (stopper=='no'));i++){
-                    
-                    const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
-                    const settings = {
-                    async: true,
-                    crossDomain: true,
-                    url: url_str,
-                    method: 'GET',
-                    headers: {}
-                    };
-                
-                    $(document).ready(function(){
-                        $("#msgid").html('doin stuff...');
-                        $.ajax(settings).done(function (response) {
-                            
-                            const json = JSON.stringify(response).replace(/[\r\n]/gm, '');
-                            
-                            const obj = JSON.parse(json);
-                            
-                            if (obj.length==0){
-                                stopper='no';
-                            }
-                            
-                            for (let j = 0; j < obj.owners.length; j++) {
-                            //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
-                            addresses+=obj.owners[j].owner.address.toString()+','
-                            } 
-                            address_list += addresses.split(',')
 
-                            if (address_list.includes(myWaddy)){
-                                var elems = document.getElementsByClassName("button");
-                                for(var i = 0; i < elems.length; i++) {
-                                    elems[i].disabled = false;
-                                }
-                            } else {
-                                var elems = document.getElementsByClassName("button");
-                                for(var i = 0; i < elems.length; i++) {
-                                    elems[i].disabled = true;
-                                }
-                            }
+                token_limit=3;
+                time_delta=1500;
+                for (let i=1;i<=token_limit;i++){
+                    
+                    setTimeout(function() {
+                        
+
+                        const url_str='https://testnets-api.opensea.io/api/v1/asset/'+contract+'/'+i.toString()+'/owners';
+                        const settings = {
+                        async: false,
+                        crossDomain: true,
+                        url: url_str,
+                        method: 'GET',
+                        headers: {}
+                        };
+
+                        
+                        $(document).ready(function(){
+                            
+                            $.ajax(settings).done(function (response) {
+                                
+                                
+                                json = JSON.stringify(response).replace(/[\r\n]/gm, '');
+                                
+                                document.getElementById('myTXT').innerHTML='CHECKING FOR '+token_tracker+'-'+i;
+                                //alert(jsons)
+                                const obj = JSON.parse(json);
+                                
+                                
+                                for (let j = 0; j < obj.owners.length; j++) {
+                                //text += token_tracker+'-'+i.toString()+': '+obj.owners[j].owner.address.toString() + "<br>";
+                                addresses+=obj.owners[j].owner.address.toString()+','
+                                } 
+                                address_list += addresses.split(',')
+
+                                if (address_list.includes(myWaddy)){
+                                    var elems = document.getElementsByClassName("button");
+                                    for(var ii = 0; ii < elems.length; ii++) {
+                                        elems[ii].disabled = false;
+                                        outcome='success';
+                                    }
+                                } 
+                            
+                                setTimeout(function() {
+                                    if (outcome==='success'){
+                                        document.getElementById('myTXT').innerHTML='PLAYER UNLOCKED!'
+                                        setTimeout(function() {document.getElementById('myTXT').innerHTML+='<br>&nbsp->LOADING TRACK...'},1000);
+                                        setTimeout(function() {nextsong()},3000);
+                                        outcome='done';
+                                    } 
+                                },(token_limit+1)*time_delta);
+
+                                setTimeout(function() {
+                                    if (outcome!='done'){
+                                        unlock_failure();
+                                        outcome='failed';
+                                    } 
+                                },(token_limit+5)*time_delta);
+                                
+                                
+                            });
                             
                         });
-                        
-                    });
+                    },i*time_delta);
                 };
+                
             };
+            //setTimeout(function() {if (outcome==='undetermined'){unlock_failure();}},1)
+            
         };
         function mintButton(){
-            tryToken();
             var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
             console.log("Minting...")
             ethereum
@@ -192,6 +220,17 @@
         async function success() {
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='MINT COMPLETE (UNLOCKED!)<br>&nbsp&nbsp-> WAYAK - INFLUENCE'; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://arweave.net/5CgSOJz_F9YT6BDPmDNcxgl-UglfCVVGpYWzPNE2vNI?ext=mp4'; document.getElementById('myIMG').src='https://arweave.net/HFkFfLf4uP2Gv_jFss9SEsKdNPng2lO6tXo3fj0t980?ext=png'; document.getElementById('myHREF').href='https://exchange.art/series/Influence/nfts'; document.getElementById('myLOADING').src='';
         }
+        async function unlock_success() {
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='UNLOCK SUCCESSFUL!<br>&nbsp&nbsp-> WAYAK - INFLUENCE'; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://arweave.net/5CgSOJz_F9YT6BDPmDNcxgl-UglfCVVGpYWzPNE2vNI?ext=mp4'; document.getElementById('myIMG').src='https://arweave.net/HFkFfLf4uP2Gv_jFss9SEsKdNPng2lO6tXo3fj0t980?ext=png'; document.getElementById('myHREF').href='https://exchange.art/series/Influence/nfts'; document.getElementById('myLOADING').src='';
+        }
+        async function unlock_progress() {
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML="CHECKING WALLET FOR KEYS..."; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/WAITING.gif'; document.getElementById('myHREF').href=''; document.getElementById('myLOADING').src='';
+                        
+        }
+        async function unlock_failure() {
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='UNLOCK_FAILED: <br><button class="button" onclick="tryToken();" style="font-size:12;">TRY AGAIN</button> OR <a href="https://twitter.com/martin_gerber"><button class="button" style="font-size:12;" target="_blank">CONTACT GERBS</button></a>'; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/CONTACT.png'; document.getElementById('myHREF').href='https://twitter.com/martin_gerber'; document.getElementById('myLOADING').src='';
+                        
+        }
         async function txnprogress(txHash) {
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML="Waiting for tx <a href='https://goerli.etherscan.io/tx/"+txHash+"' target='_blank'>"+txHash+"<a/>"; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/WAITING.gif'; document.getElementById('myHREF').href=''; document.getElementById('myLOADING').src='';
                         
@@ -204,11 +243,13 @@
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='TRANSACTION REVERTED ('+err+'): <br><button class="button" onclick="mintButton();" style="font-size:12;">TRY AGAIN</button> OR <a href="https://twitter.com/martin_gerber"><button class="button" style="font-size:12;" target="_blank">CONTACT GERBS</button></a>'; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/CONTACT.png'; document.getElementById('myHREF').href='https://twitter.com/martin_gerber'; document.getElementById('myLOADING').src='';
                         
         }
+        var funclist = ["play_Wayak","play_Sound_Mechanic","play_Hurric4n3","play_Jadyn_Violet","play_Amy_Correa_Bell","play_Les_Les","play_Evaflow","play_Elameen","play_Dundo","play_Ayotemi","play_Shark_Anthony","play_XAND","play_Martin_Gerber","play_DFreshmaker","play_Serboy","play_Sayten","play_Gx","play_Jack_Frost","play_PinkStar"];
+        var funclist_mem=funclist;
         function nextsong() {
             // function we want to run
-            var funclist = ["play_Wayak","play_Sound_Mechanic","play_Hurric4n3","play_Jadyn_Violet","play_Amy_Correa_Bell","play_Les_Les","play_Evaflow","play_Elameen","play_Dundo","play_Ayotemi","play_Shark_Anthony","play_XAND","play_Martin_Gerber","play_DFreshmaker","play_Serboy","play_Sayten","play_Gx","play_Jack_Frost","play_PinkStar"];
             var playrandom = funclist[Math.floor(Math.random() * funclist.length)];
-
+            funclist=funclist.filter(e => e !== playrandom); // remove selected track from future options to avoid repeat plays
+            if (funclist.length==0) {funclist=funclist_mem}; // list has run dry, restore original list
             // find object
             var fn = window[playrandom];
 
