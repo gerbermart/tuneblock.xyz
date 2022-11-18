@@ -1,0 +1,138 @@
+body {
+    background: #000000;
+}
+
+.button {
+  background-color: black; 
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px;
+}
+
+/* mouse over link */
+button:hover:enabled {
+  background-color: #2a9e00;
+  color: black;
+}
+
+/* mouse over link */
+button:hover:disabled {
+  background-color: #b81001;
+  color: white;
+}
+
+.DISABLED_button {
+  background-color: grey; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px;
+}
+
+
+
+
+.container {
+    display: grid;
+    width: 100%;
+    gap:15px 15px;
+    grid-template-columns: repeat(auto-fit, minmax(355px, 1fr));
+}
+
+.polaroid {
+    display: grid;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.content {
+    z-index: 1;
+    min-height: 313px; 
+    min-width: 304; 
+    max-height:313px;
+    max-width: 304px;
+    margin-left: 12px;
+    margin-top: 20px;
+    overflow: hidden; 
+    filter: brightness(50%) saturate(120%) contrast(120%) brightness(200%) blur(0.5px);
+    background: url('IMAGES/STATIC.gif') no-repeat;
+    grid-area: 1 / 1;
+}
+
+.t-image {
+  position: relative; /* Declared position allows for location changes */
+  top: -200px; /* Moves the image 2px closer to the top of the page */
+}
+
+.box-link { 
+    z-index: 5;
+    height: 300px; 
+    width: 290px; 
+    margin-left: 15px;
+    margin-top: 20px;
+    grid-area: 1 / 1;
+    background-color: transparent; 
+    border: 0px solid yellow; 
+}
+
+.overlay {
+    z-index: 2;
+    width: 340px; 
+    height: 420px; 
+    overflow: hidden;
+    grid-area: 1 / 1;
+}
+
+.video_content {
+    z-index: 3;
+    min-height: 313px; 
+    min-width: 305px; 
+    max-height:313px;
+    max-width: 308px;
+    margin-left: 15px;
+    margin-top: 20px;
+    overflow: hidden; 
+    filter: brightness(50%) saturate(120%) contrast(120%) brightness(200%) blur(0.5px);
+    grid-area: 1 / 1;
+}
+
+.iframe_content {
+    z-index: 3;
+    min-height: 313px; 
+    min-width: 305px; 
+    max-height:313px;
+    max-width: 308px;
+    margin-left: 15px;
+    margin-top: 20px;
+    overflow: hidden; 
+    filter: brightness(50%) saturate(120%) contrast(120%) brightness(200%) blur(0.5px);
+    grid-area: 1 / 1;
+}
+
+.text{
+    z-index:4;
+    position: relative;
+    margin-left: 22px;
+    margin-top:-66px;
+    font-family: "Courier New"; 
+    font-size: 24;
+}
+
+a:link, a:visited, a:active {
+  color: black;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: #2a9e00;
+}
