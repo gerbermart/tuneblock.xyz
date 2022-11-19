@@ -58,8 +58,8 @@
             myWaddy=account.toLowerCase();
             // add in the bit where we check the token owners
 
-            let contracts=['0x87aca4cc2fe698e2dd5664934d1669ab2d23ba88'];
-            let token_trackers=['TUNES'];
+            let contracts=['0x4C743fdAcE7CCB3eE39A8Ca34aD40Aa242f3d6E7'];
+            let token_trackers=['JUKES'];
             let address_list=[];
             var outcome = 'undetermined'
             for (k=0;k<contracts.length;k++){
@@ -149,72 +149,7 @@
                 
             }
         }
-        function mintButton(){
-            var nummints=parseInt(prompt("Enter number of tokens to mint","1"));
-            console.log("Minting...")
-            ethereum
-                .request({
-                    method: 'eth_sendTransaction',
-                    params: [
-                        {
-                        from: ethereum.selectedAddress,
-                        to: '0x87aca4cc2fe698e2dd5664934d1669ab2d23ba88',
-                        value: '0x'+(nummints*1000000000000000).toString(16),
-                        data: '0x702e499'+(nummints).toString(16).padStart(65, '0'),
-                        },
-                    ],
-                })
-                .then((txHash) => loopcheck(txHash))
-                .catch((error) => console.error);
-        }
-        function loopcheck(txHash) {
-            txnprogress(txHash);
-            exitflag=false;
-            checkTXN(txHash);
-            if (exitflag===false){
-                intervalID = setInterval(function(){checkTXN(txHash);}, 2000);
-            }
-            
-            
-            setTimeout(function() { 
-                if (exitflag===false){
-                    error_out('TIMEOUT (TRANSACTION STILL IN PROGRESS')
-                }
-                clearInterval(intervalID); 
-            }, 120000);
-            
-        }
-
-        function checkTXN(txHash) {
-
-            
-
-            try {
-                web3.eth.getTransactionReceipt(txHash, (err, receipt) => {
-                    
-                    
-                    // If we've got a receipt, check status and log / change text accordingly
-                    if (receipt.status===true) {
-                        clearInterval(intervalID); 
-                        exitflag=true;
-                        unlock_the_buttons();
-                        document.getElementById('myTXT').innerHTML='MINT COMPLETE! PLAYER UNLOCKED!'
-                        setTimeout(function() {document.getElementById('myTXT').innerHTML+='<br>&nbsp->LOADING TRACK...'},1000);
-                        setTimeout(function() {nextsong()},3000);
-                        
-                    }
-                    else if (receipt.status === false) {
-                        clearInterval(intervalID); 
-                        exitflag=true;
-                        failure();
-                    }
-                });
-            } catch (err) {
-                clearInterval(intervalID); 
-                exitflag=true;
-                error_out(err);
-            }
-        }
+        
         async function clear_window(){
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML=''; document.getElementById('myHREF').style='display:none;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src=''; document.getElementById('myHREF').href=''; document.getElementById('myLOADING').src='';
         }
