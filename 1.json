@@ -1,0 +1,94 @@
+{
+    "name":"TuneBlock Jukebox Player",
+    "created_by":"martin gerber",
+    "description":"The First TuneBlock JukeBox Player from tuneblock.xyz",
+    "external_url":"https://tuneblock.xyz",
+    "attributes":[
+        {
+            "trait_type":"Artist",
+            "value":"Wayak"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Sound Mechanic"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Hurric4n3Ike"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Jadyn Violet"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Amy Correa Bell"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Les Les"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"DJ Twinny Twin"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Evaflow"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Elameen"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Dundo"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Ayotemi"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Ali Bianchi"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Shark Anthony"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"PinkStar JVB"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"X&ND"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Martin Gerber"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"AmbieNFT (DFreshmaker Presents)"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Serboy"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Sayten89"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Gx Universe"
+        },
+        {
+            "trait_type":"Artist",
+            "value":"Jack Frost"
+        }
+    ],
+    "image": "https://bafybeib73e255jllb5po5eibpltfcmiqhh7baqropyp4pkumchih43bify.ipfs.nftstorage.link/",
+    "animation_url": "https://bafybeiclk7p2muwwymdtctkawha64bghna3cslsvm5gix3f22rpxtnr5nq.ipfs.nftstorage.link/PLAYER.html"
+}
