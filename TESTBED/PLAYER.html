@@ -210,7 +210,7 @@ a:hover {
                 token_number=1;
                 token_limit=1;
                 time_delta=1500;
-                for (let i=token_number;(i<=token_limit && stopper=='no');i++){
+                for (let i=1;(i<=token_limit && stopper=='no');i++){
                     
                     setTimeout(function() {
                         
@@ -270,7 +270,7 @@ a:hover {
                             });
                             
                         });
-                    },0);
+                    },i*time_delta);
                 };
                 
             };
