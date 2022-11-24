@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <script>
+            function copyURL() {
+                document.getElementById("txt").value=window.location.href;
+                document.getElementById("txt").style="display:inline;";
+                document.getElementById("txt").select();
+                document.execCommand("copy");
+                document.getElementById("txt").style="display:none;";
+            }
+            
+        </script>
+    </head>
+    <body>
+
+        <button onclick="copyURL();">COPY URL</button>
+        <textarea style="display:none;" id="txt"></textarea>
+        
+    </body>
+</html>
