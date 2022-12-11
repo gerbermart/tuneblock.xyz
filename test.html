@@ -58,7 +58,7 @@
             myWaddy=account.toLowerCase();
             // add in the bit where we check the token owners
 
-            let contracts=['0x87aca4cc2fe698e2dd5664934d1669ab2d23ba88'];
+            let contracts=['0x9a1dFE64442701DAF7FfF81434a3C0792eED107F'];
             let token_trackers=['TUNES'];
             let address_list=[];
             var outcome = 'undetermined'
@@ -158,7 +158,7 @@
                     params: [
                         {
                         from: ethereum.selectedAddress,
-                        to: '0x87aca4cc2fe698e2dd5664934d1669ab2d23ba88',
+                        to: '0x9a1dFE64442701DAF7FfF81434a3C0792eED107F',
                         value: '0x'+(nummints*1000000000000000).toString(16),
                         data: '0x702e499'+(nummints).toString(16).padStart(65, '0'),
                         },
