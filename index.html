@@ -291,7 +291,7 @@
             document.getElementById('mySONG').src='HURRICANE.mp3'; document.getElementById('mySONG').style='display:none;'; 
             document.getElementById('myVIDEO').style='margin-top:69;display: none;'; 
             document.getElementById('myIMG').src='HURRICANE.gif'; 
-            document.getElementById('myIMG').style='margin-left:-100'; 
+            document.getElementById('myIMG').style='margin-left:0;margin-top:75;'; 
             document.getElementById('myVIDEO').src=''; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myHREF').href=''
             document.getElementById('myPLAY').play();
         }
@@ -346,7 +346,7 @@
             document.getElementById('mySONG').src='PINKSTAR.mp3'; document.getElementById('mySONG').style='display:none;'; 
             document.getElementById('myVIDEO').style='display: none;height:313;'; 
             document.getElementById('myIMG').src='PINKSTAR.gif'; 
-            document.getElementById('myIMG').style='margin-left:-120'; 
+            document.getElementById('myIMG').style='margin-left:0;margin-top:75;'; 
             document.getElementById('myVIDEO').src=''; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myHREF').href=''
             document.getElementById('myPLAY').play();
         }
@@ -380,7 +380,7 @@
             document.getElementById('myTXT').innerHTML='GX UNIVERSE - BRAND NEW'+controls_html;document.getElementById('myHREF').style='display:none;'; 
             document.getElementById('mySONG').src='GX.mp3'; document.getElementById('mySONG').style='display:none;'; 
             document.getElementById('myVIDEO').style='display: none;'; 
-            document.getElementById('myIMG').style='margin-left:0'; 
+            document.getElementById('myIMG').style='margin-left:0;margin-top:75;'; 
             document.getElementById('myIMG').src='GX.gif'; document.getElementById('myVIDEO').src=''; 
             document.getElementById('myVIDEO').src=''; 
             document.getElementById('myIFRAME').src=''; 
@@ -407,7 +407,7 @@
             </div>
             <div class="iframe_content">
                 <iframe id="myIFRAME" allowfullscreen="false" style='display:none;' width="600" height="313" src="" onclick="this.paused ? this.play() : this.pause();"></iframe>
-                <video onended="nextsong()" autoplay webkit-playsinline playsinline id="myVIDEO" poster="IMAGES/STATIC_PLAY.mp4" allowfullscreen="false" style='display:none;' width="600" height="313" src="" onclick="this.paused ? this.play() : this.pause();" ontimeupdate="document.getElementById('tracktime').innerHTML = Math.floor(this.currentTime/60) + ':' + Math.floor(this.currentTime-Math.floor(this.currentTime/60)*60+1) + ' / ' + Math.floor(this.duration/60) + ':' + Math.floor(this.duration-Math.floor(this.duration/60)*60+1);"></video>
+                <video onended="nextsong()" autoplay webkit-playsinline playsinline id="myVIDEO" poster="BLACKOUT.png" allowfullscreen="false" style='display:none;' width="600" height="313" src="" onclick="this.paused ? this.play() : this.pause();" ontimeupdate="document.getElementById('tracktime').innerHTML = Math.floor(this.currentTime/60) + ':' + Math.floor(this.currentTime-Math.floor(this.currentTime/60)*60+1) + ' / ' + Math.floor(this.duration/60) + ':' + Math.floor(this.duration-Math.floor(this.duration/60)*60+1);"></video>
             </div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
             <div class="text" style="font-size: 16px; margin: top -75px;">

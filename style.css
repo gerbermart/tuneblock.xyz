@@ -64,7 +64,7 @@ button:hover:disabled {
     margin-top: 20px;
     overflow: hidden; 
     filter: brightness(50%) saturate(120%) contrast(120%) brightness(200%) blur(0.5px);
-    background: url('IMAGES/STATIC.gif') no-repeat;
+    background: url('BLACKOUT.png') no-repeat;
     grid-area: 1 / 1;
 }
 
