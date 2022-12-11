@@ -18,7 +18,7 @@
     <script src="./web3.min.js"></script>
     <script type="text/javascript">
         window.addEventListener('load', function () {
-            window.web3 = new Web3(new Web3.providers.HttpProvider("https://goerli.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
+            window.web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/3958482f63514737a6c4d0ff7ab263ae"));
         })
         window.addEventListener('load', function () {
             if (exit===true){
@@ -36,7 +36,7 @@
                 const chainId = await provider.request({
                     method: 'eth_chainId'
                 });
-                if (chainId=='0x5') {
+                if (chainId=='0x1') {
                     //var fn = window[funcpass];
                     //fn();
                     if (funcpass==='tryToken'){tryToken();}
@@ -233,7 +233,7 @@
                         
         }
         async function txnprogress(txHash) {
-            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML="Waiting for tx <a href='https://goerli.etherscan.io/tx/"+txHash+"' target='_blank'>"+txHash+"<a/>"; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/WAITING.gif'; document.getElementById('myHREF').href=''; document.getElementById('myLOADING').src='';
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML="Waiting for tx <a href='https://etherscan.io/tx/"+txHash+"' target='_blank'>"+txHash+"<a/>"; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/WAITING.gif'; document.getElementById('myHREF').href=''; document.getElementById('myLOADING').src='';
                         
         }
         async function failure() {
