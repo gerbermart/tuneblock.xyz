@@ -2,19 +2,18 @@
     <head>
         <script>
             function copyURL() {
-                document.getElementById("txt").value=window.location.href;
-                document.getElementById("txt").style="display:inline;";
-                document.getElementById("txt").select();
+                document.getElementById("url_txt").value=window.location.href;
+                document.getElementById("url_txt").style="display:inline;";
+                document.getElementById("url_txt").select();
                 document.execCommand("copy");
-                document.getElementById("txt").style="display:none;";
+                document.getElementById("url_txt").style="display:none;";
             }
             
         </script>
     </head>
     <body>
 
-        <button onclick="copyURL();">COPY URL</button>
-        <textarea style="display:none;" id="txt"></textarea>
+        <textarea style="display:none;" id="url_txt"></textarea>
         
     </body>
 </html>

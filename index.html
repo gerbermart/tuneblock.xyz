@@ -244,7 +244,7 @@
             document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='TRANSACTION REVERTED ('+err+'): <br><button class="button" onclick="mintButton();" style="font-size:12;">TRY AGAIN</button> OR <a href="https://twitter.com/martin_gerber"><button class="button" style="font-size:12;" target="_blank">CONTACT GERBS</button></a>'; document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src=''; document.getElementById('myIMG').src='IMAGES/CONTACT.png'; document.getElementById('myHREF').href='https://twitter.com/martin_gerber'; document.getElementById('myLOADING').src='';
                         
         }
-        var funclist = ["play_Wayak","play_Sound_Mechanic","play_Hurric4n3","play_Jadyn_Violet","play_Amy_Correa_Bell","play_Les_Les","play_Evaflow","play_Elameen","play_Dundo","play_Ayotemi","play_Shark_Anthony","play_XAND","play_Martin_Gerber","play_DFreshmaker","play_Serboy","play_Sayten89","play_Gx","play_Jack_Frost","play_PinkStar"];
+        var funclist = ["play_Wayak","play_Sound_Mechanic","play_Hurric4n3","play_Jadyn_Violet","play_Amy_Correa_Bell","play_Les_Les","play_Elameen","play_Dundo","play_Ayotemi","play_Shark_Anthony","play_XAND","play_Martin_Gerber","play_DFreshmaker","play_Serboy","play_Sayten89","play_Gx","play_PinkStar"];//"play_Evaflow"
         var funclist_mem=funclist;
         function nextsong() {
             // function we want to run
@@ -287,7 +287,12 @@
             document.getElementById('myPLAY').play();
         }
         function play_Hurric4n3() {
-            document.getElementById('myPLAY').src='./IMAGES/STATIC_PLAY.mp4'; document.getElementById('myPLAY').style='display: inline;'; document.getElementById('myTXT').innerHTML='HURRIC4N3IKE - SOUTHSIDEWAVEZ'+controls_html;document.getElementById('myHREF').style='display:none;'; document.getElementById('mySONG').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='margin-left:-50%;display: inline;'; document.getElementById('myIMG').src=''; document.getElementById('myVIDEO').src=''; document.getElementById('myVIDEO').src='./IMAGES/HURRICANE.mp4'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myHREF').href='https://opensea.io/collection/hurric4n3szn-2022-southsidewavez-genesis-music-vid'
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='HURRIC4N3IKE - SOUTHSIDEWAVEZ'+controls_html;document.getElementById('myHREF').style='display:none;'; 
+            document.getElementById('mySONG').src='HURRICANE.mp3'; document.getElementById('mySONG').style='display:none;'; 
+            document.getElementById('myVIDEO').style='margin-top:69;display: none;'; 
+            document.getElementById('myIMG').src='HURRICANE.gif'; 
+            document.getElementById('myIMG').style='margin-left:-100'; 
+            document.getElementById('myVIDEO').src=''; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myHREF').href=''
             document.getElementById('myPLAY').play();
         }
         function play_Jadyn_Violet() {
@@ -328,15 +333,29 @@
             document.getElementById('myPLAY').play();
         }
         function play_Shark_Anthony() {
-            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='SHARK ANTHONY - INTO THE METAVERSE'+controls_html;document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://mintsongs.mypinata.cloud/ipfs/QmbUvruaZDrporkDe6qMQd8UtnknXRGddpAH7aVqd8ipX7'; document.getElementById('myIMG').src='https://mintsongs.mypinata.cloud/ipfs/QmSAbdtzvcNU3po8TckHGEoBxqT7arNwhAsd76a6KBQRZ6'; document.getElementById('myHREF').href='https://www.mintsongs.com/editions/159535'
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='<span style="position:absolute;margin-top:-19;">SHARK ANTHONY <br> &nbsp&nbsp - INTO THE METAVERSE</span>'+controls_html;document.getElementById('myHREF').style='display:none;'; 
+            document.getElementById('mySONG').src='SHARK.mp3'; document.getElementById('mySONG').style='display:none;'; 
+            document.getElementById('myVIDEO').style='margin-top:18;display: none;'; 
+            document.getElementById('myIMG').style='margin-left:0'; 
+            document.getElementById('myIMG').src='SHARK.gif'; 
+            document.getElementById('myVIDEO').src=''; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myHREF').href=''
             document.getElementById('myPLAY').play();
         }
         function play_PinkStar() {
-            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='PINKSTAR JVB - DANCING WITH MYSELF'+controls_html;document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://openseauserdata.com/files/de57e8e262555e882726a35a8ee27df8.mp4'; document.getElementById('myIMG').src='https://lh3.googleusercontent.com/oNTEyzobCl68bgvtIdn5bMxtNt0JOWfADytDJySZRcQ0m_Lf7CAtMMFC_j8finntx9CguiES1fRvKUcWg0ubpT7SAHFyfD_ZSOZZXts'; document.getElementById('myHREF').href='https://opensea.io/collection/pinkstar-collection-1'
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='<span style="position:absolute;margin-top:-19;">PINKSTAR JVB <br> &nbsp&nbsp - DANCING WITH MYSELF</span>'+controls_html;document.getElementById('myHREF').style='display:none;'; 
+            document.getElementById('mySONG').src='PINKSTAR.mp3'; document.getElementById('mySONG').style='display:none;'; 
+            document.getElementById('myVIDEO').style='display: none;height:313;'; 
+            document.getElementById('myIMG').src='PINKSTAR.gif'; 
+            document.getElementById('myIMG').style='margin-left:-120'; 
+            document.getElementById('myVIDEO').src=''; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myHREF').href=''
             document.getElementById('myPLAY').play();
         }
         function play_XAND() {
-            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; document.getElementById('myTXT').innerHTML='X&ND X OMGKIRBY - LOST IN MY MIND'+controls_html;document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIMG').src=''; document.getElementById('mySONG').src='https://arweave.net/CwhA9CT01pSya63ke4qaJew8BxEDYmqX8g_fuNVqr7U'; document.getElementById('myIMG').src='https://arweave.net/qoEBgak7yGVLgzVjVzEtcSNynUiR_ozJQBQ3a1fXMS0'; document.getElementById('myHREF').href='https://open.spotify.com/track/7E1o5N8TXptYhvUSIIUKxg?si=3ecfb2d796b544e6'
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: none;'; 
+            document.getElementById('myTXT').innerHTML='X&ND - BEG FOR IT'+controls_html;document.getElementById('myHREF').style='display:inline;'; document.getElementById('myVIDEO').src=''; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('mySONG').style='display:inline;'; document.getElementById('myVIDEO').style='display:none;'; document.getElementById('myIMG').src=''; 
+            document.getElementById('mySONG').src='XAND.mp3'; 
+            document.getElementById('myIMG').src='XAND.jpg'; document.getElementById('myHREF').href=''
+            document.getElementById('myIMG').style='margin-left:0'; 
             document.getElementById('myPLAY').play();
         }
         function play_Martin_Gerber() {
@@ -357,7 +376,15 @@
             document.getElementById('myPLAY').play();
         }
         function play_Gx() {
-            document.getElementById('myPLAY').src='./IMAGES/STATIC_PLAY.mp4'; document.getElementById('myPLAY').style='display: inline;'; document.getElementById('myTXT').innerHTML='<a target=_blank href=https://objkt.com/asset/KT1H2uPAdEwDUrhgpTry8YSCiNGX2PWwNV1y/2>GX UNIVERSE - X-DRAGON BREATH</a>'+controls_html;document.getElementById('myHREF').style='display:none;'; document.getElementById('mySONG').src=''; document.getElementById('mySONG').style='display:none;'; document.getElementById('myVIDEO').style='margin-left:-50%;display: inline;'; document.getElementById('myIMG').src=''; document.getElementById('myVIDEO').src=''; document.getElementById('myVIDEO').src='./IMAGES/XDRAGON_BREATH.mp4'; document.getElementById('myIFRAME').src=''; document.getElementById('myIFRAME').style='display:none;'; document.getElementById('myHREF').href=''
+            document.getElementById('myPLAY').src=''; document.getElementById('myPLAY').style='display: inline;'; 
+            document.getElementById('myTXT').innerHTML='GX UNIVERSE - BRAND NEW'+controls_html;document.getElementById('myHREF').style='display:none;'; 
+            document.getElementById('mySONG').src='GX.mp3'; document.getElementById('mySONG').style='display:none;'; 
+            document.getElementById('myVIDEO').style='display: none;'; 
+            document.getElementById('myIMG').style='margin-left:0'; 
+            document.getElementById('myIMG').src='GX.gif'; document.getElementById('myVIDEO').src=''; 
+            document.getElementById('myVIDEO').src=''; 
+            document.getElementById('myIFRAME').src=''; 
+            document.getElementById('myIFRAME').style='position:relative; margin-top:0; display:none;'; document.getElementById('myHREF').href=''
             document.getElementById('myPLAY').play();
         }
         function play_Jack_Frost() {
@@ -481,7 +508,7 @@
         <div class="polaroid">
             <div class="content"><img src="./IMAGES/XAND.jpg"></div>
             <div class="overlay"><img src="./IMAGES/COVER.png"></div>
-            <div class="text"><b><button disabled class="button" onclick="play_XAND();">&#9655</button><a href="https://withkoji.com/@Elameen" target="_blank"> X&ND</a></b></div>
+            <div class="text"><b><button disabled class="button" onclick="play_XAND();">&#9655</button><a href="https://twitter.com/xandforshort" target="_blank"> X&ND</a></b></div>
             <a class="box-link" href="https://xandy.land/" target="_blank"></a>
         </div>
         <div class="polaroid">
